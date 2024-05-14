@@ -1,11 +1,9 @@
 import { login } from "@/services/login.service";
-import { JSESSIONID, callMirthApi } from "@/services/rest.service";
+import { JSESSIONID, MIRTH_URL, callMirthApi } from "@/services/rest.service";
 import { NextResponse } from "next/server";
 import { xml2json } from "xml-js";
 
 export async function GET(request: Request) {
-    const url = "https://172.18.2.23:8443/api/";
-
     if (JSESSIONID === "") {
         await login();
     }
@@ -13,11 +11,13 @@ export async function GET(request: Request) {
     try {
         const [channels, channelGroups, channelsStatistics, channelStatuses] =
             await Promise.all([
-                callMirthApi(url + "channels", { request }),
-                callMirthApi(url + "channelgroups", { request }),
-                callMirthApi(url + "channels/statistics", { request }),
-                callMirthApi(url + "channels/statuses", { request }),
+                callMirthApi(MIRTH_URL + "channels", { request }),
+                callMirthApi(MIRTH_URL + "channelgroups", { request }),
+                callMirthApi(MIRTH_URL + "channels/statistics", { request }),
+                callMirthApi(MIRTH_URL + "channels/statuses", { request }),
             ]);
+
+        console.log(channels)
 
         if (
             channels.status == 200

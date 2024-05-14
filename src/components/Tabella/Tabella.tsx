@@ -1,43 +1,24 @@
-"use client";
-import { getDataPerTabella } from "@/services/data.service";
 import ListaChannelGroups from "./ListaChannelGroups";
-import { useEffect, useState } from "react";
 
-const Tabella = ({ listaCanali }: { listaCanali?: any[] }) => {
-  const [data, setData]: [
-    {
-      id: string;
-      name: string;
-      channels: any[];
-    }[],
-    any
-  ] = useState([]);
-
-  useEffect(() => {
-    (async function () {
-      const dataTabella = await getDataPerTabella();
-
-      if (dataTabella) {
-        //@ts-ignore
-        setData(dataTabella._template);
-      }
-    })();
-  }, []);
-
+const Tabella = async () => {
   return (
-    <section className="">
-      <div className="overflow-y-auto border border-gray-200 md:rounded-lg h-[calc(100vh-3rem-var(--header-size))]">
+    <section>
+      <div className="overflow-y-auto border border-gray-200 md:rounded-lg h-[calc(100vh-3.5rem-var(--header-size))]">
         <table className="min-w-full divide-y divide-gray-200 h-full">
           <thead
             className="sticky top-0 bg-gray-50"
             style={{ boxShadow: "0 0 0 1px rgba(0,0,0,.25)" }}
           >
             <tr>
+              <th className="px-4 py-3.5 text-sm font-normal text-left text-gray-500 w-4">
+                Status
+              </th>
+
               <th
                 scope="col"
                 className="px-4 py-3.5 text-sm font-normal text-left text-gray-500 w-4"
               >
-                {/* <!-- Status --> */}
+                Azioni
               </th>
 
               <th
@@ -121,7 +102,8 @@ const Tabella = ({ listaCanali }: { listaCanali?: any[] }) => {
               </th>
             </tr>
           </thead>
-          {data && <ListaChannelGroups data={data} />}
+
+          <ListaChannelGroups />
         </table>
       </div>
     </section>

@@ -1,6 +1,9 @@
 export const BASE_URL = "https://172.18.3.226:3000";
 // export const BASE_URL = "https://localhost:3000";
 
+export const MIRTH_URL = "https://172.18.2.23:8443/api/";
+// export const MIRTH_URL = "https://172.18.2.28:8443/api/";
+
 export let JSESSIONID = "";
 
 export const callInternalApi = async (endpoint: string): Promise<any> => {

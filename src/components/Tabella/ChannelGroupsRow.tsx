@@ -11,19 +11,22 @@ const ChannelGroupsRow = ({
   };
 }) => {
   return (
-    <tr className="border-t border-slate-300">
+    <tr className="border-t border-slate-300 bg-slate-100">
       {/* Stato */}
-      <td className="px-4 py-4 text-sm font-medium text-gray-700 whitespace-nowrap">
-        {/* Stato Check verde */}
+      {/* <td className="px-4 py-4 text-sm font-medium text-gray-700 whitespace-nowrap">
         {gruppo.name == "STARTED" && <></>}
-        {/* Stato X rossa */}
         {gruppo.name == "STOPPED" && <></>}
-        {/* Stato sospeso giallo */}
         {gruppo.name == "" && <></>}
-      </td>
+      </td> */}
+
+      {/* Azioni */}
+      <td></td>
 
       {/* Nome */}
-      <td className="px-4 py-4 text-sm font-medium text-gray-700  whitespace-nowrap">
+      <td
+        colSpan={2}
+        className="px-4 py-4 text-sm font-medium text-gray-700  whitespace-nowrap"
+      >
         {/* <div className="inline-flex items-center gap-x-3"> */}
         {/* <input type="checkbox" className="text-blue-500 border-gray-300 rounded">  */}
         <span>{gruppo.name}</span>
