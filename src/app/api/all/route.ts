@@ -156,6 +156,7 @@ const getChannelListForChannelGroup = (
                 id: infoPerCanale?.id["_text"] ?? "",
                 name: infoPerCanale?.name["_text"] ?? "",
                 description: infoPerCanale?.description["_text"] ?? "",
+                sourceDestinationChannels: getSourceDestinationPerCanale(statusPerCanale?.childStatuses?.dashboardStatus),
                 statistics: {
                     received: statistichePerCanale?.received["_text"] ?? "",
                     sent: statistichePerCanale?.sent["_text"] ?? "",
@@ -173,3 +174,47 @@ const getChannelListForChannelGroup = (
 
     return [];
 };
+
+const getSourceDestinationPerCanale = (listaChildren: any[]): {
+    id: string;
+    name: string;
+    state: string;
+    statistics: {
+        RECEIVED: string;
+        FILTERED: string;
+        SENT: string;
+        ERROR: string;
+    }
+}[] => {
+    if (Array.isArray(listaChildren)) {
+        return listaChildren.map((childStatus: any) => {
+            // Ottiene le statistiche
+            let stats = {}
+            for (let entry of childStatus.statistics.entry) {
+                stats = {
+                    ...stats,
+                    [entry["com.mirth.connect.donkey.model.message.Status"]["_text"]]: entry["long"]["_text"]
+                }
+            }
+
+            return {
+                id: childStatus.channelId["_text"],
+                name: childStatus.name["_text"],
+                state: childStatus.state["_text"],
+                statistics: stats
+            } as {
+                id: string;
+                name: string;
+                state: string;
+                statistics: {
+                    RECEIVED: string;
+                    FILTERED: string;
+                    SENT: string;
+                    ERROR: string;
+                }
+            }
+        })
+    }
+
+    return []
+}

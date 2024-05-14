@@ -121,7 +121,7 @@ const Tabella = ({ listaCanali }: { listaCanali?: any[] }) => {
               </th>
             </tr>
           </thead>
-          <tbody>{data && <ListaChannelGroups data={data} />}</tbody>
+          {data && <ListaChannelGroups data={data} />}
         </table>
       </div>
     </section>

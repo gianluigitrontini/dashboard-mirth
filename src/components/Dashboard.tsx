@@ -1,5 +1,5 @@
 import LoadingSpinner from "./LoadingSpinner";
-import Tabella from "./Tabella";
+import Tabella from "./Tabella/Tabella";
 
 const Dashboard = async () => {
   let isLoading = false;
