@@ -1,4 +1,5 @@
 import React from "react";
+import IconeStatus from "../IconeStatus";
 
 const SourceDestinationRow = ({
   list,
@@ -19,94 +20,52 @@ const SourceDestinationRow = ({
     <>
       {list.map((sourceDestination) => (
         <tr key={sourceDestination.id} className="bg-slate-50">
-          {/* <!-- Stato --> */}
+          {/*  Stato */}
           <td className="px-4 py-4 text-sm font-medium text-gray-700 whitespace-nowrap">
-            {/* <!-- Stato Check verde --> */}
+            {/*  Stato Check verde */}
             {sourceDestination.state == "STARTED" && (
               <div className="inline-flex items-center px-3 py-1 rounded-full gap-x-2 text-emerald-500 bg-emerald-100/60">
-                <svg
-                  width="12"
-                  height="12"
-                  viewBox="0 0 12 12"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M10 3L4.5 8.5L2 6"
-                    stroke="currentColor"
-                    strokeWidth="1.5"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
+                <IconeStatus tipo="STARTED" />
               </div>
             )}
-            {/* <!-- Stato X rossa --> */}
+            {/*  Stato X rossa */}
             {sourceDestination.state == "STOPPED" && (
               <div className="inline-flex items-center px-3 py-1 text-red-500 rounded-full gap-x-2 bg-red-100/60 ">
-                <svg
-                  width="12"
-                  height="12"
-                  viewBox="0 0 12 12"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M9 3L3 9M3 3L9 9"
-                    stroke="currentColor"
-                    strokeWidth="1.5"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
+                <IconeStatus tipo="STOPPED" />
               </div>
             )}
-            {/* <!-- Stato sospeso giallo --> */}
+            {/*  Stato sospeso giallo */}
             {sourceDestination.state == "" && (
               <div className="inline-flex items-center px-3 py-1 text-yellow-500 rounded-full gap-x-2 bg-yellow-100/60 ">
-                <svg
-                  width="12"
-                  height="12"
-                  viewBox="0 0 12 12"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M9 3L3 9M3 3L9 9"
-                    stroke="currentColor"
-                    strokeWidth="1.5"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
+                <IconeStatus tipo="SUSPENDED" />
               </div>
             )}
           </td>
-          {/* <!-- Nome --> */}
+          {/*  Nome */}
           <td className="px-4 py-4 text-sm text-gray-700  whitespace-nowrap">
             {sourceDestination.name}
           </td>
-          {/* <!-- Ultimo deployment --> */}
+          {/*  Ultimo deployment */}
           <td className="px-4 py-4 text-sm font-normal text-gray-700 whitespace-nowrap">
             {/* {sourceDestination.status.lastDeployed != "" && canale.status.lastDeployed._text} */}
           </td>
-          {/* <!-- Ricevuti --> */}
+          {/*  Ricevuti */}
           <td className="px-4 py-4 text-sm font-normal text-gray-700 whitespace-nowrap">
             {sourceDestination.statistics.RECEIVED}
           </td>
-          {/* <!-- Filtrati --> */}
+          {/*  Filtrati */}
           <td className="px-4 py-4 text-sm font-normal text-gray-700 whitespace-nowrap">
             {sourceDestination.statistics.FILTERED}
           </td>
-          {/* <!-- In coda --> */}
+          {/*  In coda */}
           <td className="px-4 py-4 text-sm font-normal text-gray-700 whitespace-nowrap">
             {/* {sourceDestination.statistics.} */}
           </td>
-          {/* <!-- Inviati --> */}
+          {/*  Inviati */}
           <td className="px-4 py-4 text-sm font-normal text-gray-700 whitespace-nowrap">
             {sourceDestination.statistics.SENT}
           </td>
-          {/* <!-- Errori --> */}
+          {/*  Errori */}
           <td className="px-4 py-4 text-sm font-normal text-gray-700 whitespace-nowrap">
             {sourceDestination.statistics.ERROR}
           </td>

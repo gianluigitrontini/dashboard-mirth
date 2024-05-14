@@ -1,6 +1,7 @@
 "use client";
 import React from "react";
 import SourceDestinationRow from "./SourceDestinationRow";
+import IconeStatus from "../IconeStatus";
 
 export interface ChannelInterface {
   description: string;
@@ -36,95 +37,53 @@ const ChannelsRow = ({ canale }: { canale: ChannelInterface }) => {
           onClick={() => setIsVisible(!isVisible)}
           className="bg-slate-100 cursor-default"
         >
-          {/* <!-- Stato --> */}
+          {/* Stato */}
           <td className="px-4 py-4 text-sm font-medium text-gray-700 whitespace-nowrap">
-            {/* <!-- Stato Check verde --> */}
+            {/* Stato Check verde */}
             {canale.status.state == "STARTED" && (
               <div className="inline-flex items-center px-3 py-1 rounded-full gap-x-2 text-emerald-500 bg-emerald-100/60">
-                <svg
-                  width="12"
-                  height="12"
-                  viewBox="0 0 12 12"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M10 3L4.5 8.5L2 6"
-                    stroke="currentColor"
-                    strokeWidth="1.5"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
+                <IconeStatus tipo="STARTED" />
               </div>
             )}
-            {/* <!-- Stato X rossa --> */}
+            {/* Stato Stop */}
             {canale.status.state == "STOPPED" && (
-              <div className="inline-flex items-center px-3 py-1 text-red-500 rounded-full gap-x-2 bg-red-100/60 ">
-                <svg
-                  width="12"
-                  height="12"
-                  viewBox="0 0 12 12"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M9 3L3 9M3 3L9 9"
-                    stroke="currentColor"
-                    strokeWidth="1.5"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
+              <div className="inline-flex items-center px-3 py-1  rounded-full gap-x-2 text-red-500 bg-red-100/60 ">
+                <IconeStatus tipo="STOPPED" />
               </div>
             )}
-            {/* <!-- Stato sospeso giallo --> */}
+            {/* Stato sospeso giallo */}
             {canale.status.state == "" && (
-              <div className="inline-flex items-center px-3 py-1 text-yellow-500 rounded-full gap-x-2 bg-yellow-100/60 ">
-                <svg
-                  width="12"
-                  height="12"
-                  viewBox="0 0 12 12"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M9 3L3 9M3 3L9 9"
-                    stroke="currentColor"
-                    strokeWidth="1.5"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
+              <div className="inline-flex items-center px-3 py-1  rounded-full gap-x-2 text-yellow-500 bg-yellow-100/60 ">
+                <IconeStatus tipo="SUSPENDED" />
               </div>
             )}
           </td>
-          {/* <!-- Nome --> */}
+          {/* Nome */}
           <td className="px-4 py-4 text-sm text-gray-700  whitespace-nowrap">
             {canale.name}
           </td>
-          {/* <!-- Ultimo deployment --> */}
+          {/* Ultimo deployment */}
           <td className="px-4 py-4 text-sm font-normal text-gray-700 whitespace-nowrap">
             {canale.status.lastDeployed != "" &&
               canale.status.lastDeployed._text}
           </td>
-          {/* <!-- Ricevuti --> */}
+          {/* Ricevuti */}
           <td className="px-4 py-4 text-sm font-normal text-gray-700 whitespace-nowrap">
             {canale.statistics.received}
           </td>
-          {/* <!-- Filtrati --> */}
+          {/* Filtrati */}
           <td className="px-4 py-4 text-sm font-normal text-gray-700 whitespace-nowrap">
             {canale.statistics.filtered}
           </td>
-          {/* <!-- In coda --> */}
+          {/* In coda */}
           <td className="px-4 py-4 text-sm font-normal text-gray-700 whitespace-nowrap">
             {canale.statistics.queued}
           </td>
-          {/* <!-- Inviati --> */}
+          {/* Inviati */}
           <td className="px-4 py-4 text-sm font-normal text-gray-700 whitespace-nowrap">
             {canale.statistics.sent}
           </td>
-          {/* <!-- Errori --> */}
+          {/* Errori */}
           <td className="px-4 py-4 text-sm font-normal text-gray-700 whitespace-nowrap">
             {canale.statistics.error}
           </td>
