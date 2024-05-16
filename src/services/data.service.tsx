@@ -52,6 +52,24 @@ export const getDataPerTabella = async (): Promise<
 };
 
 // Dati per API v2 formato json
+export const getDataV2 = async (
+  endpoint: "all" | "channelgroups" | "channels" | "statistics" | "statuses"
+): Promise<GetDataPerTabellaRes | { msg: string; status: string }> => {
+  try {
+    let response = await callInternalApiV2(endpoint);
+
+    if (response.ok == false) {
+      throw { status: response.status, msg: response.statusText };
+    }
+
+    const data = await response.json();
+    return data;
+  } catch (err: any) {
+    console.log(err);
+    return { msg: err.msg, status: err.status };
+  }
+};
+
 export const getDataPerTabellaV2 = async (): Promise<
   GetDataPerTabellaRes | { msg: string; status: string }
 > => {
@@ -69,6 +87,7 @@ export const getDataPerTabellaV2 = async (): Promise<
     return { msg: err.msg, status: err.status };
   }
 };
+
 export const getChannelGroupsV2 = async (): Promise<
   GetDataPerTabellaRes | { msg: string; status: string }
 > => {

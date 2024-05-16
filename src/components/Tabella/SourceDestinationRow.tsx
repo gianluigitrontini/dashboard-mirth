@@ -1,77 +1,66 @@
 import React from "react";
 import IconeStatus from "../IconeStatus";
-import { SourceDestinationInterface } from "./ListaChannelGroups";
+import { SourceDestinationInterface } from "./TabellaDataList";
 
-const SourceDestinationRow = async ({
+const tdClassname =
+  "px-4 py-4 text-sm font-normal text-gray-700 whitespace-nowrap text-center";
+
+const SourceDestinationRow = ({
   sourceDestination,
 }: {
   sourceDestination: SourceDestinationInterface;
 }) => {
   return (
-    <>
-      <tr key={sourceDestination.id}>
-        {/*  Stato */}
-        <td className="px-4 py-4 text-sm font-medium text-gray-700 whitespace-nowrap">
-          {/*  Stato Check verde */}
-          {sourceDestination.state == "STARTED" && (
-            <div className="mx-auto w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
-          )}
+    <tr key={sourceDestination.id}>
+      {/*  Stato */}
+      <td className="px-4 py-4 text-sm font-medium text-gray-700 whitespace-nowrap">
+        {/*  Stato Check verde */}
+        {sourceDestination.state == "STARTED" && (
+          <div className="mx-auto w-2 h-2 bg-green-500 rounded-full"></div>
+        )}
 
-          {sourceDestination.state == "STOPPED" && (
-            <div className="mx-auto w-2 h-2 bg-red-500 rounded-full"></div>
-          )}
+        {sourceDestination.state == "STOPPED" && (
+          <div className="mx-auto w-2 h-2 bg-red-500 rounded-full"></div>
+        )}
 
-          {/* {sourceDestination.state == "" && (
+        {/* {sourceDestination.state == "" && (
               <div className="inline-flex items-center px-3 py-1 text-yellow-500 rounded-full gap-x-2 bg-yellow-100/60 ">
                 <IconeStatus tipo="SUSPEND" />
               </div>
             )} */}
-        </td>
+      </td>
 
-        {/* Azioni */}
-        <td>
-          {sourceDestination.state == "STARTED" && (
-            <div className="text-neutral-400 cursor-pointer mx-auto">
-              <IconeStatus className="mx-auto" tipo="STOP" />
-            </div>
-          )}
+      {/* Azioni */}
+      <td>
+        {sourceDestination.state == "STARTED" && (
+          <div className="text-neutral-400 cursor-pointer mx-auto">
+            <IconeStatus className="mx-auto" tipo="STOP" />
+          </div>
+        )}
 
-          {sourceDestination.state == "STOPPED" && (
-            <div className="text-neutral-400 cursor-pointer mx-auto">
-              <IconeStatus className="mx-auto" tipo="START" />
-            </div>
-          )}
-        </td>
-        {/*  Nome */}
-        <td className="px-4 py-4 text-sm text-gray-700  whitespace-nowrap">
-          {sourceDestination.name}
-        </td>
-        {/*  Ultimo deployment */}
-        <td className="px-4 py-4 text-sm font-normal text-gray-700 whitespace-nowrap">
-          {/* {sourceDestination.status.lastDeployed != "" && canale.status.lastDeployed._text} */}
-        </td>
-        {/*  Ricevuti */}
-        <td className="px-4 py-4 text-sm font-normal text-gray-700 whitespace-nowrap">
-          {sourceDestination.statistics.RECEIVED}
-        </td>
-        {/*  Filtrati */}
-        <td className="px-4 py-4 text-sm font-normal text-gray-700 whitespace-nowrap">
-          {sourceDestination.statistics.FILTERED}
-        </td>
-        {/*  In coda */}
-        <td className="px-4 py-4 text-sm font-normal text-gray-700 whitespace-nowrap">
-          {/* {sourceDestination.statistics.} */}
-        </td>
-        {/*  Inviati */}
-        <td className="px-4 py-4 text-sm font-normal text-gray-700 whitespace-nowrap">
-          {sourceDestination.statistics.SENT}
-        </td>
-        {/*  Errori */}
-        <td className="px-4 py-4 text-sm font-normal text-gray-700 whitespace-nowrap">
-          {sourceDestination.statistics.ERROR}
-        </td>
-      </tr>
-    </>
+        {sourceDestination.state == "STOPPED" && (
+          <div className="text-neutral-400 cursor-pointer mx-auto">
+            <IconeStatus className="mx-auto" tipo="START" />
+          </div>
+        )}
+      </td>
+      {/*  Nome */}
+      <td className={tdClassname + " !text-left"}>{sourceDestination.name}</td>
+      {/*  Ultimo deployment */}
+      <td className={tdClassname}>
+        {/* {sourceDestination.status.lastDeployed != "" && canale.status.lastDeployed._text} */}
+      </td>
+      {/*  Ricevuti */}
+      <td className={tdClassname}>{sourceDestination.statistics.RECEIVED}</td>
+      {/*  Filtrati */}
+      <td className={tdClassname}>{sourceDestination.statistics.FILTERED}</td>
+      {/*  In coda */}
+      <td className={tdClassname}>{/* {sourceDestination.statistics.} */}</td>
+      {/*  Inviati */}
+      <td className={tdClassname}>{sourceDestination.statistics.SENT}</td>
+      {/*  Errori */}
+      <td className={tdClassname}>{sourceDestination.statistics.ERROR}</td>
+    </tr>
   );
 };
 

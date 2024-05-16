@@ -1,7 +1,11 @@
+"use client";
 import React from "react";
 import { ChannelInterface } from "./ChannelsRow";
 
-const ChannelGroupsRow = async ({
+const tdClassname =
+  "px-4 py-4 text-sm font-normal text-gray-700 whitespace-nowrap text-center";
+
+const ChannelGroupsRow = ({
   gruppo,
 }: {
   gruppo: {
@@ -10,6 +14,13 @@ const ChannelGroupsRow = async ({
     channels: ChannelInterface[];
   };
 }) => {
+  console.log(gruppo);
+
+  // check if all values of an array contains a property with a specific value. if true, return true
+  // const checkIfAllValuesContainsProperty = (array: any[], property: string, value: string) => {
+  //   return array.every((item) => item[property] === value);
+  // };
+
   return (
     <tr className="border-t border-slate-300 bg-slate-100">
       {/* Stato */}
@@ -20,43 +31,25 @@ const ChannelGroupsRow = async ({
       </td> */}
 
       {/* Azioni */}
-      <td></td>
+      {/* <td></td> */}
 
       {/* Nome */}
-      <td
-        colSpan={2}
-        className="px-4 py-4 text-sm font-medium text-gray-700  whitespace-nowrap"
-      >
-        {/* <div className="inline-flex items-center gap-x-3"> */}
-        {/* <input type="checkbox" className="text-blue-500 border-gray-300 rounded">  */}
+      <td colSpan={3} className={tdClassname + " !text-left"}>
         <span>{gruppo.name}</span>
-        {/* </div>  */}
       </td>
 
       {/* Ultimo deployment */}
-      <td className="px-4 py-4 text-sm text-gray-500 whitespace-nowrap">
-        &mdash;
-      </td>
+      <td className={tdClassname}>{/* &mdash; */}</td>
       {/* Ricevuti */}
-      <td className="px-4 py-4 text-sm text-gray-500 whitespace-nowrap">
-        {/* TODO */}
-      </td>
+      <td className={tdClassname}>{/* TODO */}</td>
       {/* Filtrati */}
-      <td className="px-4 py-4 text-sm text-gray-500  whitespace-nowrap">
-        {/* TODO */}
-      </td>
+      <td className={tdClassname}>{/* TODO */}</td>
       {/* In coda */}
-      <td className="px-4 py-4 text-sm text-gray-500  whitespace-nowrap">
-        {/* TODO */}
-      </td>
+      <td className={tdClassname}>{/* TODO */}</td>
       {/* Inviati */}
-      <td className="px-4 py-4 text-sm text-gray-500  whitespace-nowrap">
-        {/* TODO */}
-      </td>
+      <td className={tdClassname}>{/* TODO */}</td>
       {/* Errori */}
-      <td className="px-4 py-4 text-sm text-gray-500  whitespace-nowrap">
-        {/* TODO */}
-      </td>
+      <td className={tdClassname}>{/* TODO */}</td>
     </tr>
   );
 };

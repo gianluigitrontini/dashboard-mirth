@@ -1,6 +1,15 @@
-import ListaChannelGroups from "./ListaChannelGroups";
+import { loginV2 } from "@/services/login.service";
+import TabellaDataList from "./TabellaDataList";
+import { getDataPerTabellaV2, getDataV2 } from "@/services/data.service";
+
+const thClassname =
+  "py-3.5 px-4 text-sm font-normal text-left text-gray-500 text-center";
 
 const Tabella = async () => {
+  await loginV2();
+  const res: any = await getDataV2("all");
+  const data: any[] = res._template || [];
+
   return (
     <section>
       <div className="overflow-y-auto border border-gray-200 md:rounded-lg h-[calc(100vh-3.5rem-var(--header-size))]">
@@ -59,51 +68,35 @@ const Tabella = async () => {
                 </div>
               </th>
 
-              <th
-                scope="col"
-                className="px-4 py-3.5 text-sm font-normal text-left text-gray-500"
-              >
+              <th scope="col" className={thClassname}>
                 Ultimo Deployment
               </th>
 
-              <th
-                scope="col"
-                className="px-4 py-3.5 text-sm font-normal text-left text-gray-500"
-              >
+              <th scope="col" className={thClassname}>
                 Ricevuti
               </th>
 
-              <th
-                scope="col"
-                className="px-4 py-3.5 text-sm font-normal text-left text-gray-500"
-              >
+              <th scope="col" className={thClassname}>
                 Filtrati
               </th>
 
-              <th
-                scope="col"
-                className="px-4 py-3.5 text-sm font-normal text-left text-gray-500"
-              >
+              <th scope="col" className={thClassname}>
                 In Coda
               </th>
 
-              <th
-                scope="col"
-                className="px-4 py-3.5 text-sm font-normal text-left text-gray-500"
-              >
+              <th scope="col" className={thClassname}>
                 Inviati
               </th>
 
-              <th
-                scope="col"
-                className="px-4 py-3.5 text-sm font-normal text-left text-gray-500"
-              >
+              <th scope="col" className={thClassname}>
                 Errori
               </th>
             </tr>
           </thead>
 
-          <ListaChannelGroups />
+          <tbody>
+            <TabellaDataList data={data} />
+          </tbody>
         </table>
       </div>
     </section>
