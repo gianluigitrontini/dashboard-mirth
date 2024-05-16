@@ -1,4 +1,4 @@
-import { callInternalApi } from "./rest.service";
+import { callInternalApi, callInternalApiV2 } from "./rest.service";
 
 export interface GetDataPerTabellaRes {
   channels: any[];
@@ -8,19 +8,36 @@ export interface GetDataPerTabellaRes {
   _template: any[];
 }
 
-export const getChannelGroup = async (): Promise<
-  | {
-      list: {
-        channelGroup: any[];
-      };
-    }
-  | {
-      msg: string;
-      status: string;
-    }
+// export const getChannelGroup = async (): Promise<
+//   | {
+//       list: {
+//         channelGroup: any[];
+//       };
+//     }
+//   | {
+//       msg: string;
+//       status: string;
+//     }
+// > => {
+//   try {
+//     let response = await callInternalApi(`channelgroups`);
+
+//     if (response.ok == false) {
+//       throw { status: response.status, msg: response.statusText };
+//     }
+
+//     const data = await response.json();
+//     return data;
+//   } catch (error: any) {
+//     return { msg: error.msg, status: error.status };
+//   }
+// };
+
+export const getDataPerTabella = async (): Promise<
+  GetDataPerTabellaRes | { msg: string; status: string }
 > => {
   try {
-    let response = await callInternalApi(`channelgroups`);
+    let response = await callInternalApi("all");
 
     if (response.ok == false) {
       throw { status: response.status, msg: response.statusText };
@@ -28,16 +45,86 @@ export const getChannelGroup = async (): Promise<
 
     const data = await response.json();
     return data;
-  } catch (error: any) {
-    return { msg: error.msg, status: error.status };
+  } catch (err: any) {
+    console.log(err);
+    return { msg: err.msg, status: err.status };
   }
 };
 
-export const getDataPerTabella = async (): Promise<
+// Dati per API v2 formato json
+export const getDataPerTabellaV2 = async (): Promise<
   GetDataPerTabellaRes | { msg: string; status: string }
 > => {
   try {
-    let response = await callInternalApi("all");
+    let response = await callInternalApiV2("all");
+
+    if (response.ok == false) {
+      throw { status: response.status, msg: response.statusText };
+    }
+
+    const data = await response.json();
+    return data;
+  } catch (err: any) {
+    console.log(err);
+    return { msg: err.msg, status: err.status };
+  }
+};
+export const getChannelGroupsV2 = async (): Promise<
+  GetDataPerTabellaRes | { msg: string; status: string }
+> => {
+  try {
+    let response = await callInternalApiV2("channelgroups");
+
+    if (response.ok == false) {
+      throw { status: response.status, msg: response.statusText };
+    }
+
+    const data = await response.json();
+    return data;
+  } catch (err: any) {
+    console.log(err);
+    return { msg: err.msg, status: err.status };
+  }
+};
+export const getChannelsV2 = async (): Promise<
+  GetDataPerTabellaRes | { msg: string; status: string }
+> => {
+  try {
+    let response = await callInternalApiV2("channels");
+
+    if (response.ok == false) {
+      throw { status: response.status, msg: response.statusText };
+    }
+
+    const data = await response.json();
+    return data;
+  } catch (err: any) {
+    console.log(err);
+    return { msg: err.msg, status: err.status };
+  }
+};
+export const getStatisticsV2 = async (): Promise<
+  GetDataPerTabellaRes | { msg: string; status: string }
+> => {
+  try {
+    let response = await callInternalApiV2("statistics");
+
+    if (response.ok == false) {
+      throw { status: response.status, msg: response.statusText };
+    }
+
+    const data = await response.json();
+    return data;
+  } catch (err: any) {
+    console.log(err);
+    return { msg: err.msg, status: err.status };
+  }
+};
+export const getStatusesV2 = async (): Promise<
+  GetDataPerTabellaRes | { msg: string; status: string }
+> => {
+  try {
+    let response = await callInternalApiV2("statuses");
 
     if (response.ok == false) {
       throw { status: response.status, msg: response.statusText };

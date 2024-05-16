@@ -1,6 +1,4 @@
-"use client";
 import React from "react";
-import SourceDestinationRow from "./SourceDestinationRow";
 import IconeStatus from "../IconeStatus";
 
 export interface ChannelRowProps extends React.ComponentPropsWithoutRef<"tr"> {
@@ -32,7 +30,7 @@ export interface ChannelInterface {
   status: { state: string; lastDeployed: string & { _text: string } };
 }
 
-const ChannelsRow = ({ canale, ...rest }: ChannelRowProps) => {
+const ChannelsRow = async ({ canale, ...rest }: ChannelRowProps) => {
   if (canale.status.state != "") {
     return (
       <tr className="bg-slate-50 cursor-default" {...rest}>
@@ -50,7 +48,7 @@ const ChannelsRow = ({ canale, ...rest }: ChannelRowProps) => {
         <td>
           {canale.status.state == "STARTED" && (
             <div
-              onClick={(e) => e.stopPropagation()}
+              // onClick={(e) => e.stopPropagation()}
               className="text-neutral-400 cursor-pointer mx-auto"
             >
               <IconeStatus className="mx-auto" tipo="STOP" />
@@ -59,7 +57,7 @@ const ChannelsRow = ({ canale, ...rest }: ChannelRowProps) => {
 
           {canale.status.state == "STOPPED" && (
             <div
-              onClick={(e) => e.stopPropagation()}
+              // onClick={(e) => e.stopPropagation()}
               className="text-neutral-400 cursor-pointer mx-auto"
             >
               <IconeStatus className="mx-auto" tipo="START" />

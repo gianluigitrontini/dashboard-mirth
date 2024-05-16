@@ -1,7 +1,7 @@
 import React from "react";
 import { ChannelInterface } from "./ChannelsRow";
 
-const ChannelGroupsRow = ({
+const ChannelGroupsRow = async ({
   gruppo,
 }: {
   gruppo: {

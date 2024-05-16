@@ -6,7 +6,7 @@ const Tabella = async () => {
       <div className="overflow-y-auto border border-gray-200 md:rounded-lg h-[calc(100vh-3.5rem-var(--header-size))]">
         <table className="min-w-full divide-y divide-gray-200 h-full">
           <thead
-            className="sticky top-0 bg-gray-50"
+            className="sticky top-0 bg-gray-50 z-50"
             style={{ boxShadow: "0 0 0 1px rgba(0,0,0,.25)" }}
           >
             <tr>

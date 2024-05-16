@@ -1,20 +1,11 @@
 import React from "react";
 import IconeStatus from "../IconeStatus";
+import { SourceDestinationInterface } from "./ListaChannelGroups";
 
-const SourceDestinationRow = ({
+const SourceDestinationRow = async ({
   sourceDestination,
 }: {
-  sourceDestination: {
-    id: string;
-    name: string;
-    state: string;
-    statistics: {
-      RECEIVED: string;
-      FILTERED: string;
-      SENT: string;
-      ERROR: string;
-    };
-  };
+  sourceDestination: SourceDestinationInterface;
 }) => {
   return (
     <>
@@ -23,11 +14,11 @@ const SourceDestinationRow = ({
         <td className="px-4 py-4 text-sm font-medium text-gray-700 whitespace-nowrap">
           {/*  Stato Check verde */}
           {sourceDestination.state == "STARTED" && (
-            <div className="mx-auto w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
+            <div className="mx-auto w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
           )}
 
           {sourceDestination.state == "STOPPED" && (
-            <div className="mx-auto w-3s h-3s bg-red-500 rounded-full"></div>
+            <div className="mx-auto w-2 h-2 bg-red-500 rounded-full"></div>
           )}
 
           {/* {sourceDestination.state == "" && (
