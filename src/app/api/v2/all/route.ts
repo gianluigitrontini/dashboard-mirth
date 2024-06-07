@@ -22,7 +22,6 @@ export async function GET(request: Request) {
             && channelsStatisticsRes.status == 200
             && channelStatusesRes.status == 200
         ) {
-
             const channels = await channelsRes.json()
             const channelGroups = await channelGroupsRes.json()
             const channelsStatistics = await channelsStatisticsRes.json()
@@ -40,14 +39,13 @@ export async function GET(request: Request) {
                 listaChannelStatusesApi
             );
 
-            return new NextResponse(
-                JSON.stringify({
-                    channels: listaChannelsApi,
-                    groups: listaChannelGroupsApi,
-                    statistics: listaChannelsStatisticsApi,
-                    statuses: listaChannelStatusesApi,
-                    _template: datiPerTabella,
-                })
+            return NextResponse.json({
+                channels: listaChannelsApi,
+                groups: listaChannelGroupsApi,
+                statistics: listaChannelsStatisticsApi,
+                statuses: listaChannelStatusesApi,
+                _template: datiPerTabella,
+            }
             );
         }
 

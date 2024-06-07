@@ -15,9 +15,7 @@ export async function GET(request: Request) {
 
             const listaChannelStatusesApi = channelStatuses.list.dashboardStatus;
 
-            return new NextResponse(
-                JSON.stringify(listaChannelStatusesApi)
-            );
+            return NextResponse.json(listaChannelStatusesApi);
         }
         throw { status: statusesRes.status, msg: statusesRes.statusText };
     } catch (error: any) {

@@ -14,9 +14,7 @@ export async function GET(request: Request) {
             const channelsStatistics = await statisticsRes.json()
             const listaChannelsStatisticsApi = channelsStatistics.list.channelStatistics;
 
-            return new NextResponse(
-                JSON.stringify(listaChannelsStatisticsApi)
-            );
+            return NextResponse.json(listaChannelsStatisticsApi);
         }
         throw { status: statisticsRes.status, msg: statisticsRes.statusText };
     } catch (error: any) {

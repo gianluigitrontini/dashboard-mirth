@@ -14,9 +14,7 @@ export async function GET(request: Request) {
 
             const listaChannelGroupsApi = channelGroups.list.channelGroup;
 
-            return new NextResponse(
-                JSON.stringify(listaChannelGroupsApi)
-            );
+            return NextResponse.json(listaChannelGroupsApi);
         }
 
         throw { status: channelGroupsRes.status, msg: channelGroupsRes.statusText };
