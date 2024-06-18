@@ -11,8 +11,9 @@ const Tabella = async () => {
   const data: any[] = res._template || [];
 
   return (
-    <section>
-      <div className="overflow-y-auto border border-gray-200 md:rounded-lg h-[calc(100vh-3.5rem-var(--header-size))]">
+    <>
+      {/* h-[calc(100vh-3.5rem-var(--header-size))] */}
+      <div className="h-full overflow-y-auto border border-gray-200 md:rounded-lg">
         <table className="min-w-full divide-y divide-gray-200 h-full">
           <thead
             className="sticky top-0 bg-gray-50 z-50"
@@ -99,7 +100,7 @@ const Tabella = async () => {
           </tbody>
         </table>
       </div>
-    </section>
+    </>
   );
 };
 

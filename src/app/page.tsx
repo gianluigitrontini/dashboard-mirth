@@ -1,10 +1,10 @@
-import Dashboard from "@/components/Dashboard";
-import { login, loginV2 } from "@/services/login.service";
+import { redirect } from "next/navigation";
 
-export default async function Home() {
-  return (
-    <main className="min-h-screen flex flex-col">
-      <Dashboard></Dashboard>
-    </main>
-  );
+export default async function App() {
+  // const loggedIn = true;
+  // if (loggedIn) {
+  //   redirect("/dashboard");
+  // } else {
+  //   redirect("/auth/login");
+  // }
 }

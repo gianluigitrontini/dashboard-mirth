@@ -1,0 +1,35 @@
+"use client";
+import { useState } from "react";
+
+const FilterPills = () => {
+  const [selected, setSelected] = useState("Tutti");
+
+  const tabs = [
+    {
+      name: "Tutti",
+    },
+    {
+      name: "Errori",
+    },
+    {
+      name: "Altro",
+    },
+  ];
+
+  return (
+    <div className="flex justify-center gap-4 p-4">
+      {tabs.map((tab) => (
+        <span
+          onClick={() => setSelected(tab.name)}
+          className={`cursor-pointer border border-gray-300 hover:border-blue-400 rounded-full px-3 py-1 text-sm font-semibold text-gray-600 ${
+            selected == tab.name ? "bg-blue-400 border-blue-300 text-white" : ""
+          }`}
+        >
+          {tab.name}
+        </span>
+      ))}
+    </div>
+  );
+};
+
+export default FilterPills;
