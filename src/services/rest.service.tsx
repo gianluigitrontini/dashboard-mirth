@@ -58,6 +58,7 @@ export const callInternalApiV2 = async (endpoint: string): Promise<any> => {
         "Access-Control-Allow-Origin": "*",
         Cookie: `JSESSIONID=${JSESSIONID};`,
       },
+      cache: "no-cache",
       credentials: "include",
     });
   } catch (error) {

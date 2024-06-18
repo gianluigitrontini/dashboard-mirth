@@ -17,9 +17,10 @@ const FilterPills = () => {
   ];
 
   return (
-    <div className="flex justify-center gap-4 p-4">
+    <div className="flex justify-center gap-4">
       {tabs.map((tab) => (
         <span
+          key={tab.name}
           onClick={() => setSelected(tab.name)}
           className={`cursor-pointer border border-gray-300 hover:border-blue-400 rounded-full px-3 py-1 text-sm font-semibold text-gray-600 ${
             selected == tab.name ? "bg-blue-400 border-blue-300 text-white" : ""

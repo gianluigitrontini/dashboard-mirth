@@ -1,26 +1,31 @@
-import React from "react";
+"use client";
+import React, { memo } from "react";
 import IconeStatus from "../IconeStatus";
-import { SourceDestinationInterface } from "./TabellaDataList";
+import { SourceDestinationInterface } from "./TabellaBody";
 
 const tdClassname =
-  "px-4 py-4 text-sm font-normal text-gray-700 whitespace-nowrap text-center";
+  "px-4 py-4 text-sm font-normal text-gray-700 whitespace-nowrap text-center pl-8";
 
-const SourceDestinationRow = ({
+const stateClassname =
+  "text-neutral-400 cursor-pointer mx-auto w-2 h-2 rounded-full";
+const actionClassname = "text-neutral-400 cursor-pointer mx-auto pl-6";
+
+const SourceDestinationRow = memo(function SourceDestinationRow({
   sourceDestination,
 }: {
   sourceDestination: SourceDestinationInterface;
-}) => {
+}) {
   return (
     <tr key={sourceDestination.id}>
       {/*  Stato */}
-      <td className="px-4 py-4 text-sm font-medium text-gray-700 whitespace-nowrap">
+      <td className={tdClassname}>
         {/*  Stato Check verde */}
         {sourceDestination.state == "STARTED" && (
-          <div className="mx-auto w-2 h-2 bg-green-500 rounded-full"></div>
+          <div className={stateClassname + " bg-green-500"}></div>
         )}
 
         {sourceDestination.state == "STOPPED" && (
-          <div className="mx-auto w-2 h-2 bg-red-500 rounded-full"></div>
+          <div className={stateClassname + " bg-red-500"}></div>
         )}
 
         {/* {sourceDestination.state == "" && (
@@ -33,13 +38,13 @@ const SourceDestinationRow = ({
       {/* Azioni */}
       <td>
         {sourceDestination.state == "STARTED" && (
-          <div className="text-neutral-400 cursor-pointer mx-auto">
+          <div className={actionClassname}>
             <IconeStatus className="mx-auto" tipo="STOP" />
           </div>
         )}
 
         {sourceDestination.state == "STOPPED" && (
-          <div className="text-neutral-400 cursor-pointer mx-auto">
+          <div className={actionClassname}>
             <IconeStatus className="mx-auto" tipo="START" />
           </div>
         )}
@@ -62,6 +67,6 @@ const SourceDestinationRow = ({
       <td className={tdClassname}>{sourceDestination.statistics.ERROR}</td>
     </tr>
   );
-};
+});
 
 export default SourceDestinationRow;

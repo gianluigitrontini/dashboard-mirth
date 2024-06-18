@@ -1,11 +1,11 @@
 "use client";
-import React from "react";
+import React, { memo } from "react";
 import { ChannelInterface } from "./ChannelsRow";
 
 const tdClassname =
   "px-4 py-4 text-sm font-normal text-gray-700 whitespace-nowrap text-center";
 
-const ChannelGroupsRow = ({
+const ChannelGroupsRow = memo(function ChannelGroupsRow({
   gruppo,
 }: {
   gruppo: {
@@ -13,13 +13,8 @@ const ChannelGroupsRow = ({
     name: string;
     channels: ChannelInterface[];
   };
-}) => {
+}) {
   console.log(gruppo);
-
-  // check if all values of an array contains a property with a specific value. if true, return true
-  // const checkIfAllValuesContainsProperty = (array: any[], property: string, value: string) => {
-  //   return array.every((item) => item[property] === value);
-  // };
 
   return (
     <tr className="border-t border-slate-300 bg-slate-100">
@@ -34,7 +29,7 @@ const ChannelGroupsRow = ({
       {/* <td></td> */}
 
       {/* Nome */}
-      <td colSpan={3} className={tdClassname + " !text-left"}>
+      <td colSpan={3} className={tdClassname + " !text-left !font-medium"}>
         <span>{gruppo.name}</span>
       </td>
 
@@ -52,6 +47,6 @@ const ChannelGroupsRow = ({
       <td className={tdClassname}>{/* TODO */}</td>
     </tr>
   );
-};
+});
 
 export default ChannelGroupsRow;
