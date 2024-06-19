@@ -33,8 +33,6 @@ export interface ChannelInterface {
   status: { state: string; lastDeployed: string & { _text: string } };
 }
 
-const tdClassname =
-  "px-4 py-4 text-sm font-normal text-gray-700 whitespace-nowrap text-center pl-4";
 const stateClassname =
   "border-2 border-transparent mx-auto w-3 h-3 rounded-full animate-pulse";
 
@@ -48,11 +46,11 @@ const ChannelsRow = memo(function ChannelsRow({
 
   if (canale.status.state != "") {
     return (
-      <tr {...props} className="bg-slate-50 cursor-default">
+      <tr {...props} className="bg-slate-50 cursor-default hover:bg-blue-50">
         {/* Stato */}
-        <td className={tdClassname}>
+        <td>
           {canale.status.state == "STARTED" && (
-            <div className={stateClassname + " bg-green-500"}></div>
+            <div className={stateClassname + " !bg-green-500"}></div>
           )}
           {canale.status.state == "STOPPED" && (
             <div className={stateClassname + " !border-neutral-300"}></div>
@@ -87,24 +85,22 @@ const ChannelsRow = memo(function ChannelsRow({
         </td>
 
         {/* Nome */}
-        <td className="px-4 py-4 text-sm text-gray-700 whitespace-nowrap">
-          {canale.name}
-        </td>
+        <td className="!text-left">{canale.name}</td>
 
         {/* Ultimo deployment */}
-        <td className={tdClassname}>
+        <td>
           {canale.status.lastDeployed != "" && canale.status.lastDeployed._text}
         </td>
         {/* Ricevuti */}
-        <td className={tdClassname}>{canale.statistics.received}</td>
+        <td>{canale.statistics.received}</td>
         {/* Filtrati */}
-        <td className={tdClassname}>{canale.statistics.filtered}</td>
+        <td>{canale.statistics.filtered}</td>
         {/* In coda */}
-        <td className={tdClassname}>{canale.statistics.queued}</td>
+        <td>{canale.statistics.queued}</td>
         {/* Inviati */}
-        <td className={tdClassname}>{canale.statistics.sent}</td>
+        <td>{canale.statistics.sent}</td>
         {/* Errori */}
-        <td className={tdClassname}>{canale.statistics.error}</td>
+        <td>{canale.statistics.error}</td>
       </tr>
     );
   }

@@ -2,9 +2,6 @@
 import React, { memo } from "react";
 import { ChannelInterface } from "./ChannelsRow";
 
-const tdClassname =
-  "px-4 py-4 text-sm font-normal text-gray-700 whitespace-nowrap text-center";
-
 const ChannelGroupsRow = memo(function ChannelGroupsRow({
   gruppo,
 }: {
@@ -29,22 +26,22 @@ const ChannelGroupsRow = memo(function ChannelGroupsRow({
       {/* <td></td> */}
 
       {/* Nome */}
-      <td colSpan={3} className={tdClassname + " !text-left !font-medium"}>
+      <td colSpan={3} className="!text-left !font-medium">
         <span>{gruppo.name}</span>
       </td>
 
       {/* Ultimo deployment */}
-      <td className={tdClassname}>{/* &mdash; */}</td>
+      <td>{/* &mdash; */}</td>
       {/* Ricevuti */}
-      <td className={tdClassname}>{/* TODO */}</td>
+      <td>{/* TODO */}</td>
       {/* Filtrati */}
-      <td className={tdClassname}>{/* TODO */}</td>
+      <td>{/* TODO */}</td>
       {/* In coda */}
-      <td className={tdClassname}>{/* TODO */}</td>
+      <td>{/* TODO */}</td>
       {/* Inviati */}
-      <td className={tdClassname}>{/* TODO */}</td>
+      <td>{/* TODO */}</td>
       {/* Errori */}
-      <td className={tdClassname}>{/* TODO */}</td>
+      <td>{/* TODO */}</td>
     </tr>
   );
 });

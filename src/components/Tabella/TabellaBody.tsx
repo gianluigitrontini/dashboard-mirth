@@ -57,13 +57,11 @@ const TabellaBody = ({ data }: any) => {
 
   if (data.length === 0) {
     return (
-      <tbody>
-        <tr>
-          <td colSpan={999}>
-            <div className="mx-auto text-center">Nessun dato trovato</div>
-          </td>
-        </tr>
-      </tbody>
+      <tr>
+        <td colSpan={999}>
+          <div className="mx-auto text-center">Nessun dato trovato</div>
+        </td>
+      </tr>
     );
   }
 

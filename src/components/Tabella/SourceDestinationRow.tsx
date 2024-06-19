@@ -3,12 +3,10 @@ import React, { memo } from "react";
 import IconeStatus from "../IconeStatus";
 import { SourceDestinationInterface } from "./TabellaBody";
 
-const tdClassname =
-  "px-4 py-4 text-sm font-normal text-gray-700 whitespace-nowrap text-center pl-8";
-
 const stateClassname =
-  "text-neutral-400 cursor-pointer mx-auto w-2 h-2 rounded-full";
-const actionClassname = "text-neutral-400 cursor-pointer mx-auto pl-6";
+  "text-neutral-400 cursor-pointer mx-auto w-2 h-2 rounded-full pl-0";
+const actionClassname = "text-neutral-400 cursor-pointer mx-auto pl-0";
+const statisticsClassname = "pl-0";
 
 const SourceDestinationRow = memo(function SourceDestinationRow({
   sourceDestination,
@@ -16,9 +14,9 @@ const SourceDestinationRow = memo(function SourceDestinationRow({
   sourceDestination: SourceDestinationInterface;
 }) {
   return (
-    <tr key={sourceDestination.id}>
+    <tr key={sourceDestination.id} className="hover:bg-blue-50">
       {/*  Stato */}
-      <td className={tdClassname}>
+      <td>
         {/*  Stato Check verde */}
         {sourceDestination.state == "STARTED" && (
           <div className={stateClassname + " bg-green-500"}></div>
@@ -50,21 +48,21 @@ const SourceDestinationRow = memo(function SourceDestinationRow({
         )}
       </td>
       {/*  Nome */}
-      <td className={tdClassname + " !text-left"}>{sourceDestination.name}</td>
+      <td className="!text-left !pl-8">{sourceDestination.name}</td>
       {/*  Ultimo deployment */}
-      <td className={tdClassname}>
+      <td>
         {/* {sourceDestination.status.lastDeployed != "" && canale.status.lastDeployed._text} */}
       </td>
       {/*  Ricevuti */}
-      <td className={tdClassname}>{sourceDestination.statistics.RECEIVED}</td>
+      <td>{sourceDestination.statistics.RECEIVED}</td>
       {/*  Filtrati */}
-      <td className={tdClassname}>{sourceDestination.statistics.FILTERED}</td>
+      <td>{sourceDestination.statistics.FILTERED}</td>
       {/*  In coda */}
-      <td className={tdClassname}>{/* {sourceDestination.statistics.} */}</td>
+      <td>{/* {sourceDestination.statistics.} */}</td>
       {/*  Inviati */}
-      <td className={tdClassname}>{sourceDestination.statistics.SENT}</td>
+      <td>{sourceDestination.statistics.SENT}</td>
       {/*  Errori */}
-      <td className={tdClassname}>{sourceDestination.statistics.ERROR}</td>
+      <td>{sourceDestination.statistics.ERROR}</td>
     </tr>
   );
 });

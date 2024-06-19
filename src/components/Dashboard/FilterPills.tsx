@@ -2,18 +2,18 @@
 import { useState } from "react";
 
 const FilterPills = () => {
-  const [selected, setSelected] = useState("Tutti");
+  const [selected, setSelected] = useState("Canali");
 
   const tabs = [
     {
-      name: "Tutti",
+      name: "Canali",
     },
     {
       name: "Errori",
     },
-    {
-      name: "Altro",
-    },
+    // {
+    //   name: "Altro",
+    // },
   ];
 
   return (

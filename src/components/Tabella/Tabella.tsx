@@ -91,7 +91,7 @@ const Tabella = async ({ children }: { children: any }) => {
           </tr>
         </thead>
 
-        <tbody>{children}</tbody>
+        <tbody id="datatable">{children}</tbody>
       </table>
     </div>
   );
