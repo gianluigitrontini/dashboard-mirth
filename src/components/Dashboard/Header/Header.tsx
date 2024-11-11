@@ -1,6 +1,3 @@
-import React from "react";
-import FilterPills from "../FilterPills";
-
 const Header = async ({
   isLoading,
   children,
@@ -10,7 +7,7 @@ const Header = async ({
 }) => {
   return (
     <header
-      className="bg-gray-100 grid col-span-full items-center p-2"
+      className="bg-gray-100 grid col-span-full items-center p-2 pt-4"
       style={{ gridTemplateColumns: "150px 1fr" }}
     >
       <div className="tracking-wider">

@@ -1,12 +1,8 @@
 import { loginV2 } from "@/services/login.service";
-import { JSESSIONID, MIRTH_URL_V2, callMirthApiV2 } from "@/services/rest.service";
+import { MIRTH_URL_V2, callMirthApiV2 } from "@/services/rest.service";
 import { NextResponse } from "next/server";
 
 export async function GET(request: Request) {
-    if (JSESSIONID === "") {
-        await loginV2();
-    }
-
     try {
         let [channelsRes, channelGroupsRes, channelsStatisticsRes, channelStatusesRes] =
             await Promise.all([
@@ -45,8 +41,7 @@ export async function GET(request: Request) {
                 statistics: listaChannelsStatisticsApi,
                 statuses: listaChannelStatusesApi,
                 _template: datiPerTabella,
-            }
-            );
+            });
         }
 
         let errorList = [];
@@ -82,7 +77,7 @@ export async function GET(request: Request) {
         // Ritorna il primo errore
         throw { status: errorList[0].status, msg: "Errore in: " + errorList.map((e) => e.name).join(", ") };
     } catch (error: any) {
-        return new NextResponse(
+        return NextResponse.json(
             null,
             {
                 status: error.status,

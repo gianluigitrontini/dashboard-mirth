@@ -11,8 +11,6 @@ const ChannelGroupsRow = memo(function ChannelGroupsRow({
     channels: ChannelInterface[];
   };
 }) {
-  console.log(gruppo);
-
   return (
     <tr className="border-t border-slate-300 bg-slate-100">
       {/* Stato */}

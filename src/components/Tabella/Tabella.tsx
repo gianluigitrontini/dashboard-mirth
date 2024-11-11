@@ -9,7 +9,7 @@ const thClassname =
 
 const Tabella = async ({ children }: { children: any }) => {
   return (
-    <div className="h-full overflow-y-auto border border-gray-200 md:rounded-lg">
+    <div className="h-full overflow-y-auto border border-gray-200">
       <table className="min-w-full divide-y divide-gray-200 h-full">
         <thead
           className="sticky top-0 bg-gray-50 z-50"

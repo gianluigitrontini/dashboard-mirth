@@ -1,4 +1,4 @@
-import { BASE_URL, JSESSIONID, setToken } from "./rest.service";
+import { BASE_URL } from "./rest.service";
 
 export const login = async () => {
   try {
@@ -23,7 +23,7 @@ export const login = async () => {
 
     const data = await res.json();
 
-    await setToken(cookieValue || "");
+    // await setToken(cookieValue || "");
 
     return data;
   } catch (error: any) {
@@ -44,18 +44,11 @@ export const loginV2 = async () => {
       },
     });
 
-    const cookieValue = res.headers
-      .get("set-cookie")
-      ?.split("=")[1]
-      .split(";")[0]; // ottiene il valore del cookie JSESSIONID
-
     if (res.ok == false) {
       throw { status: res.status, msg: res.statusText };
     }
 
     const data = await res.json();
-
-    await setToken(cookieValue || "");
 
     return data;
   } catch (error: any) {

@@ -1,8 +1,9 @@
+import { MIRTH_URL } from "@/services/rest.service";
 import { NextResponse } from "next/server";
 import { xml2js, xml2json } from "xml-js";
 
 export async function GET(request: Request) {
-    let res: Response = await fetch(`https://172.18.2.23:8443/api/channelgroups`,
+    let res: Response = await fetch(MIRTH_URL + `channelgroups`,
         {
             method: "GET",
             headers: {
@@ -13,9 +14,9 @@ export async function GET(request: Request) {
     const data = await res.text();
     const json = xml2json(data, { compact: true, })
 
-    return new NextResponse(
-        json,
+    return NextResponse.json(
         {
+            json,
             status: res.status,
             statusText: res.statusText,
         }

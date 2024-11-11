@@ -1,17 +1,14 @@
 import { getDataV2 } from "@/services/data.service";
+import FilterPills from "./Dashboard/FilterPills";
 import Header from "./Dashboard/Header/Header";
 import MenuLaterale from "./Dashboard/MenuLaterale/MenuLaterale";
 import LoadingSpinner from "./LoadingSpinner";
 import Tabella from "./Tabella/Tabella";
 import TabellaBody from "./Tabella/TabellaBody";
-import BottoneMenu from "./Dashboard/MenuLaterale/BottoneMenu";
-import { refreshData } from "@/actions/fetchData";
-import FilterPills from "./Dashboard/FilterPills";
 
 const DashboardLayout = async () => {
   let isLoading = false;
 
-  // await loginV2();
   const res: any = await getDataV2("all");
   let data: any[] = res._template || [];
 

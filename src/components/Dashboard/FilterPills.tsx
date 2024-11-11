@@ -11,9 +11,6 @@ const FilterPills = () => {
     {
       name: "Errori",
     },
-    // {
-    //   name: "Altro",
-    // },
   ];
 
   return (

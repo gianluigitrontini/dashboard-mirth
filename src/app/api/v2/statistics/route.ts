@@ -1,12 +1,7 @@
-import { loginV2 } from "@/services/login.service";
-import { JSESSIONID, MIRTH_URL_V2, callMirthApiV2 } from "@/services/rest.service";
+import { MIRTH_URL_V2, callMirthApiV2 } from "@/services/rest.service";
 import { NextResponse } from "next/server";
 
 export async function GET(request: Request) {
-    if (JSESSIONID === "") {
-        await loginV2();
-    }
-
     try {
         let statisticsRes = await callMirthApiV2(MIRTH_URL_V2 + "statistics")
 
@@ -18,7 +13,7 @@ export async function GET(request: Request) {
         }
         throw { status: statisticsRes.status, msg: statisticsRes.statusText };
     } catch (error: any) {
-        return new NextResponse(
+        return NextResponse.json(
             null,
             {
                 status: error.status,

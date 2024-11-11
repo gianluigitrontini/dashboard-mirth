@@ -1,13 +1,8 @@
-import { login } from "@/services/login.service";
-import { JSESSIONID, MIRTH_URL, callMirthApi } from "@/services/rest.service";
+import { MIRTH_URL, callMirthApi } from "@/services/rest.service";
 import { NextResponse } from "next/server";
 import { xml2json } from "xml-js";
 
 export async function GET(request: Request) {
-    if (JSESSIONID === "") {
-        await login();
-    }
-
     try {
         const [channels, channelGroups, channelsStatistics, channelStatuses] =
             await Promise.all([
@@ -16,8 +11,6 @@ export async function GET(request: Request) {
                 callMirthApi(MIRTH_URL + "channels/statistics", { request }),
                 callMirthApi(MIRTH_URL + "channels/statuses", { request }),
             ]);
-
-        console.log(channels)
 
         if (
             channels.status == 200
@@ -48,7 +41,7 @@ export async function GET(request: Request) {
                 listaChannelStatusesApi
             );
 
-            return new NextResponse(
+            const response = NextResponse.json(
                 JSON.stringify({
                     channels: listaChannelsApi,
                     groups: listaChannelGroupsApi,
@@ -60,6 +53,7 @@ export async function GET(request: Request) {
         }
 
         let errorList = [];
+
         if (channels.status != 200) {
             errorList.push({
                 name: "channels",
@@ -92,7 +86,7 @@ export async function GET(request: Request) {
         // Ritorna il primo errore
         throw { status: errorList[0].status, msg: "Errore in: " + errorList.map((e) => e.name).join(", ") };
     } catch (error: any) {
-        return new NextResponse(
+        return NextResponse.json(
             null,
             {
                 status: error.status,

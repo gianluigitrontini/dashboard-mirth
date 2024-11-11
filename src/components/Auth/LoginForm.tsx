@@ -1,20 +1,19 @@
-"use client";
-import { loginV2 } from "@/services/login.service";
-import { FormEvent } from "react";
+import { BASE_URL } from "@/services/rest.service";
 
 const LoginForm = () => {
-  async function onSubmit(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-
-    const formData = new FormData(event.currentTarget);
-    await loginV2();
-
-    // Handle response if necessary
-    // const data = await response.json();
-  }
+  const auth = async (e: any) => {
+    try {
+      await fetch(`${BASE_URL}/api/v2/login`, {
+        method: "POST",
+      });
+    } catch (error: any) {
+      console.log(error);
+      return { msg: error.msg, status: error.status };
+    }
+  };
 
   return (
-    <form onSubmit={onSubmit}>
+    <form onClick={auth}>
       <div className="mb-6">
         <label
           htmlFor="name"
