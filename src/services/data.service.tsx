@@ -54,7 +54,7 @@ export const getDataPerTabella = async (): Promise<
 // Dati per API v2 formato json
 export const getDataV2 = async (
   endpoint: "all" | "channelgroups" | "channels" | "statistics" | "statuses"
-): Promise<GetDataPerTabellaRes | { msg: string; status: string }> => {
+): Promise<GetDataPerTabellaRes> => {
   try {
     let response = await callInternalApiV2(endpoint);
 
@@ -65,8 +65,7 @@ export const getDataV2 = async (
     const data = await response.json();
     return data;
   } catch (err: any) {
-    console.log(err);
-    return { msg: err.msg, status: err.status };
+    throw { msg: err.msg, status: err.status };
   }
 };
 

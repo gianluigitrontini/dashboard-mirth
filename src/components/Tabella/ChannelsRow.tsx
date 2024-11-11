@@ -1,8 +1,6 @@
 "use client";
-import React, { memo, useState } from "react";
+import React, { memo } from "react";
 import IconeStatus from "../IconeStatus";
-import SourceDestinationRow from "./SourceDestinationRow";
-import { SourceDestinationInterface } from "./TabellaBody";
 
 export interface ChannelRowProps extends React.ComponentPropsWithoutRef<"tr"> {
   canale: ChannelInterface;

@@ -4,13 +4,14 @@ import MenuLaterale from "@/components/Dashboard/MenuLaterale/MenuLaterale";
 import LoadingSpinner from "@/components/LoadingSpinner";
 import Tabella from "@/components/Tabella/Tabella";
 import TabellaBody from "@/components/Tabella/TabellaBody";
-import { getDataV2 } from "@/services/data.service";
+import { GetDataPerTabellaRes, getDataV2 } from "@/services/data.service";
 
 export default async function Dashboard() {
   let isLoading = false;
 
-  const res: any = await getDataV2("all");
-  let data: any[] = res._template || [];
+  let res: GetDataPerTabellaRes = await getDataV2("all");
+
+  let data: any[] = res?._template || [];
 
   return (
     <main>

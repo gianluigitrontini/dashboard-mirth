@@ -11,7 +11,8 @@ export const MIRTH_URL_V2 = "https://172.18.2.28:8443/api/";
  * @param endpoint
  */
 export const callInternalApi = async (endpoint: string): Promise<any> => {
-  const JSESSIONID = cookies().get("JSESSIONID")?.value;
+  const cookieStore = await cookies();
+  const JSESSIONID = cookieStore.get("JSESSIONID")?.value;
 
   try {
     return fetch(`${BASE_URL}/api/${endpoint}`, {
@@ -33,7 +34,8 @@ export const callMirthApi = async (
   url: string,
   { request }: { request: any }
 ): Promise<any> => {
-  const JSESSIONID = cookies().get("JSESSIONID")?.value;
+  const cookieStore = await cookies();
+  const JSESSIONID = cookieStore.get("JSESSIONID")?.value;
 
   try {
     return fetch(url, {
@@ -53,7 +55,8 @@ export const callMirthApi = async (
  * @param endpoint
  */
 export const callInternalApiV2 = async (endpoint: string): Promise<any> => {
-  const JSESSIONID = cookies().get("JSESSIONID")?.value;
+  const cookieStore = await cookies();
+  const JSESSIONID = cookieStore.get("JSESSIONID")?.value;
 
   try {
     return fetch(`${BASE_URL}/api/v2/${endpoint}`, {
@@ -74,7 +77,9 @@ export const callInternalApiV2 = async (endpoint: string): Promise<any> => {
 };
 
 export const callMirthApiV2 = async (url: string): Promise<any> => {
-  const JSESSIONID = cookies().get("JSESSIONID")?.value;
+  const cookieStore = await cookies();
+  const JSESSIONID = cookieStore.get("JSESSIONID")?.value;
+
   try {
     return fetch(url, {
       method: "GET",
@@ -87,17 +92,6 @@ export const callMirthApiV2 = async (url: string): Promise<any> => {
     });
   } catch (error) {
     console.log("errore in chiamata:", url, error);
-    return error;
+    throw error;
   }
 };
-
-// export const setToken = (token: string): Promise<string> => {
-//   return new Promise((resolve, reject) => {
-//     JSESSIONID = token;
-//     resolve(JSESSIONID);
-//   });
-// };
-
-// export const getToken = (): string => {
-//   return JSESSIONID;
-// };

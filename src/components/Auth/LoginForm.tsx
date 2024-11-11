@@ -1,9 +1,11 @@
-import { BASE_URL } from "@/services/rest.service";
+"use client";
+// import { BASE_URL } from "@/services/rest.service";
 
 const LoginForm = () => {
   const auth = async (e: any) => {
+    e.preventDefault();
     try {
-      await fetch(`${BASE_URL}/api/v2/login`, {
+      await fetch(`https://localhost:3000/api/v2/login`, {
         method: "POST",
       });
     } catch (error: any) {
@@ -13,7 +15,7 @@ const LoginForm = () => {
   };
 
   return (
-    <form onClick={auth}>
+    <form onSubmit={auth}>
       <div className="mb-6">
         <label
           htmlFor="name"

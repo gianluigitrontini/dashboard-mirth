@@ -1,9 +1,3 @@
-import { loginV2 } from "@/services/login.service";
-import TabellaBody from "./TabellaBody";
-import { getDataPerTabellaV2, getDataV2 } from "@/services/data.service";
-import LoadingSpinner from "../LoadingSpinner";
-import { Suspense } from "react";
-
 const thClassname =
   "py-3.5 px-4 text-sm font-normal text-left text-gray-500 text-center";
 

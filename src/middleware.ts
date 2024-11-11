@@ -1,8 +1,9 @@
-import { cookies } from 'next/headers'
-import type { NextRequest } from 'next/server'
+import { cookies } from 'next/headers';
+import type { NextRequest } from 'next/server';
 
-export function middleware(request: NextRequest) {
-    const currentUser = cookies().get('JSESSIONID')?.value
+export async function middleware(request: NextRequest) {
+    const cookieStore = await cookies();
+    const currentUser = cookieStore.get('JSESSIONID')?.value
 
     // Loggato
     if (currentUser && !request.nextUrl.pathname.startsWith('/dashboard')) {
