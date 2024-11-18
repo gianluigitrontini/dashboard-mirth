@@ -1,6 +1,5 @@
 "use client";
-import React, { Suspense, useCallback, useState } from "react";
-import LoadingSpinner from "../LoadingSpinner";
+import React, { useState } from "react";
 import ChannelGroupsRow from "./ChannelGroupsRow";
 import ChannelsRow from "./ChannelsRow";
 import SourceDestinationRow from "./SourceDestinationRow";
@@ -17,33 +16,10 @@ export interface SourceDestinationInterface {
   };
 }
 
-const TabellaBody = ({ data }: any) => {
-  const [isSourceDestinationVisible, setIsSourceDestinationVisible]: [
-    number[],
-    any
-  ] = useState([]);
-
-  /**
-   * Quando use-client è attivo
-   */
-  // const [isLoading, setIsLoading]: [boolean, any] = useState(false);
-
-  // const [data, setData]: [
-  //   {
-  //     id: string;
-  //     name: string;
-  //     channels: any[];
-  //   }[],
-  //   any
-  // ] = useState([]);
-
-  // useEffect(() => {
-  //   setIsLoading(true);
-  //   loginV2()
-  //     .then(() => getDataPerTabellaV2())
-  //     .then((data: any) => setData(data._template || []))
-  //     .then(() => setIsLoading(false));
-  // }, []);
+const TabellaBody = ({ data }: React.PropsWithoutRef<{ data: any[] }>) => {
+  const [isSourceDestinationVisible, setIsSourceDestinationVisible] = useState<
+    any[]
+  >([]);
 
   const handleSourceDestinationVisibility = (id: number) => {
     if (isSourceDestinationVisible.includes(id)) {

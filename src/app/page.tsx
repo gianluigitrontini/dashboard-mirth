@@ -1,4 +1,4 @@
-import { redirect } from "next/navigation";
+"use client";
 
 export default async function App() {
   // const loggedIn = true;

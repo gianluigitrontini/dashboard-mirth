@@ -1,7 +1,7 @@
 const thClassname =
   "py-3.5 px-4 text-sm font-normal text-left text-gray-500 text-center";
 
-const Tabella = async ({ children }: { children: any }) => {
+const Tabella = ({ children }: { children: any }) => {
   return (
     <div className="h-full overflow-y-auto border border-gray-200">
       <table className="min-w-full divide-y divide-gray-200 h-full">

@@ -104,6 +104,7 @@ export const getChannelGroupsV2 = async (): Promise<
     return { msg: err.msg, status: err.status };
   }
 };
+
 export const getChannelsV2 = async (): Promise<
   GetDataPerTabellaRes | { msg: string; status: string }
 > => {
@@ -121,6 +122,7 @@ export const getChannelsV2 = async (): Promise<
     return { msg: err.msg, status: err.status };
   }
 };
+
 export const getStatisticsV2 = async (): Promise<
   GetDataPerTabellaRes | { msg: string; status: string }
 > => {
@@ -138,6 +140,7 @@ export const getStatisticsV2 = async (): Promise<
     return { msg: err.msg, status: err.status };
   }
 };
+
 export const getStatusesV2 = async (): Promise<
   GetDataPerTabellaRes | { msg: string; status: string }
 > => {

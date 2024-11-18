@@ -1,4 +1,4 @@
-const Header = async ({
+const Header = ({
   isLoading,
   children,
 }: {

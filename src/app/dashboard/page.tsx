@@ -1,17 +1,14 @@
+"use client";
 import FilterPills from "@/components/Dashboard/FilterPills";
 import Header from "@/components/Dashboard/Header/Header";
 import MenuLaterale from "@/components/Dashboard/MenuLaterale/MenuLaterale";
 import LoadingSpinner from "@/components/LoadingSpinner";
 import Tabella from "@/components/Tabella/Tabella";
 import TabellaBody from "@/components/Tabella/TabellaBody";
-import { GetDataPerTabellaRes, getDataV2 } from "@/services/data.service";
+import { useDashboardTemplate } from "@/services/fetch.service";
 
-export default async function Dashboard() {
-  let isLoading = false;
-
-  let res: GetDataPerTabellaRes = await getDataV2("all");
-
-  let data: any[] = res?._template || [];
+export default function Dashboard() {
+  const { data, error, isLoading } = useDashboardTemplate();
 
   return (
     <main>
