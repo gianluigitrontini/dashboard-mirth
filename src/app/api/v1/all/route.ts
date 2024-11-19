@@ -1,6 +1,6 @@
 import { MIRTH_URL, callMirthApi } from "@/services/rest.service";
 import { NextResponse } from "next/server";
-import { xml2json } from "xml-js";
+var xml2js = require('xml2js');
 
 export async function GET(request: Request) {
     try {
@@ -18,20 +18,18 @@ export async function GET(request: Request) {
             && channelsStatistics.status == 200
             && channelStatuses.status == 200
         ) {
-            const _listaChannelsApi = JSON.parse(xml2json(await channels.text(), { compact: true }));
+            const parser = new xml2js.Parser({ explicitArray: false });
+
+            const _listaChannelsApi = await parser.parseStringPromise(await channels.text());
             const listaChannelsApi = _listaChannelsApi.list.channel;
 
-            const _listaChannelGroupsApi = JSON.parse(xml2json(await channelGroups.text(), { compact: true }));
+            const _listaChannelGroupsApi = await parser.parseStringPromise(await channelGroups.text());
             const listaChannelGroupsApi = _listaChannelGroupsApi.list.channelGroup;
 
-            const _listaChannelsStatisticsApi = JSON.parse(xml2json(await channelsStatistics.text(), {
-                compact: true,
-            }));
+            const _listaChannelsStatisticsApi = await parser.parseStringPromise(await channelsStatistics.text());
             const listaChannelsStatisticsApi = _listaChannelsStatisticsApi.list.channelStatistics;
 
-            const _listaChannelStatusesApi = JSON.parse(xml2json(await channelStatuses.text(), {
-                compact: true,
-            }));
+            const _listaChannelStatusesApi = await parser.parseStringPromise(await channelStatuses.text());
             const listaChannelStatusesApi = _listaChannelStatusesApi.list.dashboardStatus;
 
             const datiPerTabella = generaStrutturaPerTemplate(
@@ -41,7 +39,7 @@ export async function GET(request: Request) {
                 listaChannelStatusesApi
             );
 
-            const response = NextResponse.json(
+            return NextResponse.json(
                 JSON.stringify({
                     channels: listaChannelsApi,
                     groups: listaChannelGroupsApi,

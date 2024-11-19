@@ -1,8 +1,8 @@
 const Header = ({
-  isLoading,
+  isLoading = false,
   children,
 }: {
-  isLoading: boolean;
+  isLoading?: boolean;
   children: any;
 }) => {
   return (

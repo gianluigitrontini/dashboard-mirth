@@ -1,4 +1,5 @@
 import { MIRTH_URL_V2, callMirthApiV2 } from "@/services/rest.service";
+import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
 
 interface ChannelApiInterface {
@@ -56,6 +57,10 @@ interface ApiResponse<T> {
 }
 
 export async function GET(request: Request) {
+    console.log(request)
+    const cookieStore = await cookies();
+    console.log("JSESSIONID in /api/v2/all:", cookieStore.get("JSESSIONID")?.value);
+
     try {
         const { channels, channelGroups, channelsStatistics, channelStatuses } = await fetchMirthData();
 
@@ -75,6 +80,7 @@ export async function GET(request: Request) {
         });
     } catch (error: any) {
         // loginV2()
+        console.log(error)
         return NextResponse.json(error, { status: 400 });
     }
 }

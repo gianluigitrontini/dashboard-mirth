@@ -59,12 +59,10 @@ export const callInternalApiV2 = async (endpoint: string): Promise<any> => {
   const JSESSIONID = cookieStore.get("JSESSIONID")?.value;
 
   try {
-    return fetch(`${BASE_URL}/api/v2/${endpoint}`, {
+    fetch(`${BASE_URL}/api/v2/${endpoint}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json; charset=utf-8",
-        "Access-Control-Allow-Credentials": "true",
-        "Access-Control-Allow-Origin": "*",
         Cookie: `JSESSIONID=${JSESSIONID};`,
       },
       cache: "no-cache",

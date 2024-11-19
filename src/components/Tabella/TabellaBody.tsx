@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import ChannelGroupsRow from "./ChannelGroupsRow";
 import ChannelsRow from "./ChannelsRow";
 import SourceDestinationRow from "./SourceDestinationRow";
+import { useDashboardTemplate } from "@/services/fetch.service";
 
 export interface SourceDestinationInterface {
   id: string;
@@ -16,7 +17,10 @@ export interface SourceDestinationInterface {
   };
 }
 
-const TabellaBody = ({ data }: React.PropsWithoutRef<{ data: any[] }>) => {
+const TabellaBody = () => {
+  // Se fetcho i dati lato client, il cookie viene trovato correttamente. L'api funziona.
+  const { data, error, isLoading } = useDashboardTemplate();
+
   const [isSourceDestinationVisible, setIsSourceDestinationVisible] = useState<
     any[]
   >([]);
@@ -31,7 +35,7 @@ const TabellaBody = ({ data }: React.PropsWithoutRef<{ data: any[] }>) => {
     }
   };
 
-  if (data.length === 0) {
+  if (data?.length === 0) {
     return (
       <tr>
         <td colSpan={999}>
@@ -43,7 +47,7 @@ const TabellaBody = ({ data }: React.PropsWithoutRef<{ data: any[] }>) => {
 
   return (
     <>
-      {data.map((gruppo: any) => (
+      {data?.map((gruppo: any) => (
         <React.Fragment key={gruppo.id}>
           <ChannelGroupsRow gruppo={gruppo}></ChannelGroupsRow>
 

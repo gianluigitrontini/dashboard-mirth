@@ -5,5 +5,6 @@ export const useDashboardTemplate = () => {
     fetch(...args)
       .then((res) => res.json())
       .then((data) => data._template)
+      .catch((error) => console.log(error))
   );
 };

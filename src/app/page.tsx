@@ -1,5 +1,3 @@
-"use client";
-
 export default async function App() {
   // const loggedIn = true;
   // if (loggedIn) {

@@ -1,38 +1,8 @@
-import { redirect } from "next/navigation";
+import { serverAuth } from "@/actions/authActions";
 
-const LoginForm = () => {
-  const auth = async (formData: FormData) => {
-    "use server";
-
-    const name = formData.get("name");
-    const password = formData.get("password");
-    let success = false;
-    try {
-      const res = await fetch(`https://localhost:3000/api/v2/login`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ name, password }),
-      });
-
-      const data = await res.json();
-
-      if (
-        data["com.mirth.connect.model.LoginStatus"].status["_text"] ===
-        "SUCCESS"
-      ) {
-        success = true;
-      }
-    } catch (error: any) {
-      return { msg: error.msg, status: error.status };
-    }
-
-    success && redirect("/dashboard");
-  };
-
+const LoginForm = async () => {
   return (
-    <form action={auth}>
+    <form action={serverAuth}>
       <div className="mb-6">
         <label
           htmlFor="name"
