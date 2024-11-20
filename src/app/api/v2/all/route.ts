@@ -57,31 +57,23 @@ interface ApiResponse<T> {
 }
 
 export async function GET(request: Request) {
-    console.log(request)
-    const cookieStore = await cookies();
-    console.log("JSESSIONID in /api/v2/all:", cookieStore.get("JSESSIONID")?.value);
-
     try {
         const { channels, channelGroups, channelsStatistics, channelStatuses } = await fetchMirthData();
 
         const datiPerTabella = generaStrutturaPerTemplate(
-            channels.list.channel,
-            channelGroups.list.channelGroup,
-            channelsStatistics.list.channelStatistics,
-            channelStatuses.list.dashboardStatus
+            channels,
+            channelGroups,
+            channelsStatistics,
+            channelStatuses
         );
 
         return NextResponse.json({
-            channels: channels.list.channel,
-            groups: channelGroups.list.channelGroup,
-            statistics: channelsStatistics.list.channelStatistics,
-            statuses: channelStatuses.list.dashboardStatus,
-            _template: datiPerTabella,
+            data: datiPerTabella,
         });
     } catch (error: any) {
         // loginV2()
-        console.log(error)
-        return NextResponse.json(error, { status: 400 });
+        console.error("Error fetching Mirth data:", error);
+        return NextResponse.json({ error: error || "Internal Server Error" }, { status: 500 });
     }
 }
 
@@ -96,7 +88,7 @@ async function fetchMirthData() {
     const responses = [channelsRes, channelGroupsRes, channelsStatisticsRes, channelStatusesRes];
 
     const errorList = responses
-        .filter(res => res.status !== 200)
+        .filter(res => !res.ok)
         .map(res => ({
             name: res.url.split('/').pop(),
             reason: res.statusText,
@@ -105,16 +97,17 @@ async function fetchMirthData() {
 
     if (errorList.length > 0) {
         console.log(errorList)
-        throw { status: errorList[0].status, msg: "Errore in: " + errorList.map(e => e.name).join(", ") };
+        throw ({ ok: false, msg: "Errore in: " + errorList.map(e => e.name).join(", "), status: errorList[0].status });
     }
 
-    return {
-        channels: await channelsRes.json() as ApiResponse<{ channel: ChannelApiInterface[] }>,
-        channelGroups: await channelGroupsRes.json() as ApiResponse<{ channelGroup: ChannelGroup[] }>,
-        channelsStatistics: await channelsStatisticsRes.json() as ApiResponse<{ channelStatistics: ChannelStatistics[] }>,
-        channelStatuses: await channelStatusesRes.json() as ApiResponse<{ dashboardStatus: ChannelStatus[] }>,
-    };
+    const [channels, channelGroups, channelsStatistics, channelStatuses] = await Promise.all(responses.map(res => res.json()));
 
+    return {
+        channels: channels.list.channel,
+        channelGroups: channelGroups.list.channelGroup,
+        channelsStatistics: channelsStatistics.list.channelStatistics,
+        channelStatuses: channelStatuses.list.dashboardStatus
+    }
 }
 
 const generaStrutturaPerTemplate = (

@@ -54,16 +54,17 @@ export const callMirthApi = async (
  * API V2
  * @param endpoint
  */
-export const callInternalApiV2 = async (endpoint: string): Promise<any> => {
+export const callInternalApiV2 = async (
+  endpoint: "all" | "channelgroups" | "channels" | "statistics" | "statuses"
+): Promise<any> => {
   const cookieStore = await cookies();
-  const JSESSIONID = cookieStore.get("JSESSIONID")?.value;
 
   try {
-    fetch(`${BASE_URL}/api/v2/${endpoint}`, {
+    return fetch(`${BASE_URL}/api/v2/${endpoint}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json; charset=utf-8",
-        Cookie: `JSESSIONID=${JSESSIONID};`,
+        Cookie: cookieStore.toString(),
       },
       cache: "no-cache",
       credentials: "include",
@@ -76,20 +77,19 @@ export const callInternalApiV2 = async (endpoint: string): Promise<any> => {
 
 export const callMirthApiV2 = async (url: string): Promise<any> => {
   const cookieStore = await cookies();
-  const JSESSIONID = cookieStore.get("JSESSIONID")?.value;
 
   try {
     return fetch(url, {
       method: "GET",
       headers: {
         Accept: "application/json",
-        Cookie: `JSESSIONID=${JSESSIONID};`,
+        Cookie: cookieStore.toString(),
         "X-Requested-With": "XMLHttpRequest",
       },
       cache: "no-cache",
     });
   } catch (error) {
-    console.log("errore in chiamata:", url, error);
+    console.log("Errore in callMirthApiV2:", url, error);
     throw error;
   }
 };

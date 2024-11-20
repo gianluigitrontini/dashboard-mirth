@@ -1,17 +1,17 @@
-import { BASE_URL } from "@/services/rest.service";
+import { callInternalApiV2 } from "@/services/rest.service";
 import TabellaBody from "./TabellaBody";
 
 const thClassname =
   "py-3.5 px-4 text-sm font-normal text-left text-gray-500 text-center";
 
 const Tabella = async () => {
-  // const res = await fetch(`${BASE_URL}/api/v2/all`);
+  const res = await callInternalApiV2(`all`);
 
-  // if (!res.ok) {
-  //   return <p>Errore durante la richiesta</p>;
-  // }
-  // const resJson = await res.json();
-  // const data = resJson["_template"];
+  if (!res?.ok) {
+    return <p>Errore durante la richiesta</p>;
+  }
+  const resJson = await res.json();
+  const data = resJson.data;
 
   return (
     <div className="h-full overflow-y-auto border border-gray-200">
@@ -97,7 +97,7 @@ const Tabella = async () => {
         </thead>
 
         <tbody id="datatable">
-          <TabellaBody />
+          <TabellaBody data={data} />
         </tbody>
       </table>
     </div>

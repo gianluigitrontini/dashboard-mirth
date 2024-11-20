@@ -26,19 +26,18 @@ export async function POST(request: Request) {
         const resultText = await parser.parseStringPromise(xml)
 
         // Posso settare il cookie o qui:
-        // const cookieValue = res.headers.getSetCookie()[0].match(/(?<=JSESSIONID=)([^;]+)/) || "";
-        // const cookieStore = await cookies();
-        // cookieStore.set({
-        //     name: "JSESSIONID",
-        //     value: cookieValue[0],
-        // });
+        const cookieValue = res.headers.getSetCookie()[0].match(/(?<=JSESSIONID=)([^;]+)/) || "";
+        const cookieStore = await cookies();
+        cookieStore.set({
+            name: "JSESSIONID",
+            value: cookieValue[0],
+            secure: true,
+            httpOnly: true,
+            path: "/",
+        });
 
         // oppure posso settare il cookie in NextResponse.json, tramite l'header "Set-Cookie":
-        return NextResponse.json(resultText, {
-            headers: {
-                "Set-Cookie": res.headers.getSetCookie()[0]
-            }
-        })
+        return NextResponse.json(resultText)
     } catch (error) {
         return new NextResponse("", { status: 500 })
     }

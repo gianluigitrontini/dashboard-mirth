@@ -3,7 +3,6 @@ import React, { useState } from "react";
 import ChannelGroupsRow from "./ChannelGroupsRow";
 import ChannelsRow from "./ChannelsRow";
 import SourceDestinationRow from "./SourceDestinationRow";
-import { useDashboardTemplate } from "@/services/fetch.service";
 
 export interface SourceDestinationInterface {
   id: string;
@@ -17,9 +16,9 @@ export interface SourceDestinationInterface {
   };
 }
 
-const TabellaBody = () => {
+const TabellaBody = ({ data }: { data: any[] }) => {
   // Se fetcho i dati lato client, il cookie viene trovato correttamente. L'api funziona.
-  const { data, error, isLoading } = useDashboardTemplate();
+  // const { data, error, isLoading } = useDashboardTemplate();
 
   const [isSourceDestinationVisible, setIsSourceDestinationVisible] = useState<
     any[]

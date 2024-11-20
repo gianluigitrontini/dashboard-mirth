@@ -4,22 +4,17 @@ import { NextResponse } from "next/server";
 export async function GET(request: Request) {
     try {
         let channelGroupsRes = await callMirthApiV2(MIRTH_URL_V2 + "channelgroups")
-        if (channelGroupsRes.status == 200) {
-            const channelGroups = await channelGroupsRes.json()
 
-            const listaChannelGroupsApi = channelGroups.list.channelGroup;
-
-            return NextResponse.json(listaChannelGroupsApi);
+        if (!channelGroupsRes.ok) {
+            return new NextResponse("", { status: 500 });
         }
 
-        throw { status: channelGroupsRes.status, msg: channelGroupsRes.statusText };
+        const channelGroups = await channelGroupsRes.json()
+
+        const listaChannelGroupsApi = channelGroups.list.channelGroup;
+
+        return NextResponse.json(listaChannelGroupsApi);
     } catch (error: any) {
-        return NextResponse.json(
-            null,
-            {
-                status: error.status,
-                statusText: error.msg,
-            }
-        );
+        return new NextResponse("", { status: 500 });
     }
 }

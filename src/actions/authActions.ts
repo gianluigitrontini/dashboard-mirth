@@ -19,17 +19,22 @@ export const serverAuth = async (formData: FormData) => {
     if (!res.ok) {
         return { message: "Errore durante il login" };
     }
-    const data = await res.json()
+    const data = await res.json();
 
     if (
         data["com.mirth.connect.model.LoginStatus"].status === "SUCCESS"
     ) {
+        // Cookies gestiti dal middleware
+
         // Necessario
         const cookieMatch = res.headers.getSetCookie()[0]?.match(/(?<=JSESSIONID=)([^;]+)/) || ""; // ottiene il valore del cookie JSESSIONID
         const cookieStore = await cookies();
         cookieStore.set({
             name: "JSESSIONID",
             value: cookieMatch[0],
+            secure: true,
+            httpOnly: true,
+            path: "/",
         });
 
         redirect("/dashboard");
