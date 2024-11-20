@@ -3,25 +3,24 @@ import { cookies } from "next/headers";
 // export const BASE_URL = "https://172.18.3.226:3000";
 export const BASE_URL = "https://localhost:3000";
 
-export const MIRTH_URL = "https://172.18.2.23:8443/api/";
-export const MIRTH_URL_V2 = "https://172.18.2.28:8443/api/";
+export const MIRTH_URL = "https://172.18.2.23:8443/api";
+export const MIRTH_URL_V2 = "https://172.18.2.28:8443/api";
 
 /**
  * API V1
  * @param endpoint
  */
-export const callInternalApi = async (endpoint: string): Promise<any> => {
+export const callInternalApi = async (
+  endpoint: "all" | "channelgroups"
+): Promise<any> => {
   const cookieStore = await cookies();
-  const JSESSIONID = cookieStore.get("JSESSIONID")?.value;
 
   try {
     return fetch(`${BASE_URL}/api/${endpoint}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json; charset=utf-8",
-        "Access-Control-Allow-Credentials": "true",
-        "Access-Control-Allow-Origin": "*",
-        Cookie: `JSESSIONID=${JSESSIONID};`,
+        Cookie: cookieStore.toString(),
       },
       credentials: "include",
     });
@@ -59,37 +58,27 @@ export const callInternalApiV2 = async (
 ): Promise<any> => {
   const cookieStore = await cookies();
 
-  try {
-    return fetch(`${BASE_URL}/api/v2/${endpoint}`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json; charset=utf-8",
-        Cookie: cookieStore.toString(),
-      },
-      cache: "no-cache",
-      credentials: "include",
-    });
-  } catch (error) {
-    console.log("errore in chiamata:", endpoint, error);
-    return error;
-  }
+  return fetch(`${BASE_URL}/api/v2/${endpoint}`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json; charset=utf-8",
+      Cookie: cookieStore.toString(),
+    },
+    cache: "no-cache",
+    credentials: "include",
+  });
 };
 
-export const callMirthApiV2 = async (url: string): Promise<any> => {
+export const callMirthApiV2 = async (endpoint: string): Promise<any> => {
   const cookieStore = await cookies();
 
-  try {
-    return fetch(url, {
-      method: "GET",
-      headers: {
-        Accept: "application/json",
-        Cookie: cookieStore.toString(),
-        "X-Requested-With": "XMLHttpRequest",
-      },
-      cache: "no-cache",
-    });
-  } catch (error) {
-    console.log("Errore in callMirthApiV2:", url, error);
-    throw error;
-  }
+  return fetch(`${MIRTH_URL_V2}/${endpoint}`, {
+    method: "GET",
+    headers: {
+      Accept: "application/json",
+      Cookie: cookieStore.toString(),
+      "X-Requested-With": "XMLHttpRequest",
+    },
+    cache: "no-cache",
+  });
 };

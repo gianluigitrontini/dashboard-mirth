@@ -1,9 +1,9 @@
-import { MIRTH_URL_V2, callMirthApiV2 } from "@/services/rest.service";
+import { callMirthApiV2 } from "@/services/rest.service";
 import { NextResponse } from "next/server";
 
 export async function GET(request: Request) {
     try {
-        let statusesRes = await callMirthApiV2(MIRTH_URL_V2 + "statuses")
+        let statusesRes = await callMirthApiV2("statuses")
 
         if (statusesRes.status == 200) {
             const channelStatuses = await statusesRes.json()

@@ -1,5 +1,4 @@
 import { MIRTH_URL_V2, callMirthApiV2 } from "@/services/rest.service";
-import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
 
 interface ChannelApiInterface {
@@ -52,10 +51,6 @@ export interface DatiPerTabellaInterface {
     }[]
 }
 
-interface ApiResponse<T> {
-    list: T;
-}
-
 export async function GET(request: Request) {
     try {
         const { channels, channelGroups, channelsStatistics, channelStatuses } = await fetchMirthData();
@@ -79,10 +74,10 @@ export async function GET(request: Request) {
 
 async function fetchMirthData() {
     const [channelsRes, channelGroupsRes, channelsStatisticsRes, channelStatusesRes] = await Promise.all([
-        callMirthApiV2(MIRTH_URL_V2 + "channels"),
-        callMirthApiV2(MIRTH_URL_V2 + "channelgroups"),
-        callMirthApiV2(MIRTH_URL_V2 + "channels/statistics"),
-        callMirthApiV2(MIRTH_URL_V2 + "channels/statuses"),
+        callMirthApiV2("channels"),
+        callMirthApiV2("channelgroups"),
+        callMirthApiV2("channels/statistics"),
+        callMirthApiV2("channels/statuses"),
     ])
 
     const responses = [channelsRes, channelGroupsRes, channelsStatisticsRes, channelStatusesRes];

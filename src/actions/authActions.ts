@@ -24,8 +24,6 @@ export const serverAuth = async (formData: FormData) => {
     if (
         data["com.mirth.connect.model.LoginStatus"].status === "SUCCESS"
     ) {
-        // Cookies gestiti dal middleware
-
         // Necessario
         const cookieMatch = res.headers.getSetCookie()[0]?.match(/(?<=JSESSIONID=)([^;]+)/) || ""; // ottiene il valore del cookie JSESSIONID
         const cookieStore = await cookies();
