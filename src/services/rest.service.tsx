@@ -53,9 +53,7 @@ export const callMirthApi = async (
  * API V2
  * @param endpoint
  */
-export const callInternalApiV2 = async (
-  endpoint: "all" | "channelgroups" | "channels" | "statistics" | "statuses"
-): Promise<any> => {
+export const callInternalApiV2 = async (endpoint: string): Promise<any> => {
   const cookieStore = await cookies();
 
   return fetch(`${BASE_URL}/api/v2/${endpoint}`, {

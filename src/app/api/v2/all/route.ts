@@ -1,4 +1,5 @@
-import { MIRTH_URL_V2, callMirthApiV2 } from "@/services/rest.service";
+import { callMirthApiV2 } from "@/services/rest.service";
+import { ensureArray } from "@/services/utils.service";
 import { NextResponse } from "next/server";
 
 interface ChannelApiInterface {
@@ -64,6 +65,10 @@ export async function GET(request: Request) {
 
         return NextResponse.json({
             data: datiPerTabella,
+            channels,
+            channelGroups,
+            channelsStatistics,
+            channelStatuses,
         });
     } catch (error: any) {
         // loginV2()
@@ -185,6 +190,3 @@ const getSourceDestinationPerCanale = (listaChildren: any[]): {
     });
 };
 
-const ensureArray = <T>(input: T | T[]): T[] => {
-    return Array.isArray(input) ? input : [input];
-};

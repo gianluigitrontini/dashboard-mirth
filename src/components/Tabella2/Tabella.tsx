@@ -5,14 +5,6 @@ const thClassname =
   "py-3.5 px-4 text-sm font-normal text-left text-gray-500 text-center";
 
 const Tabella = async () => {
-  const res = await callInternalApiV2(`all`);
-
-  if (!res?.ok) {
-    return <p>Errore durante la richiesta</p>;
-  }
-
-  const { data } = await res.json();
-
   return (
     <div className="h-full overflow-y-auto border border-gray-200">
       <table className="min-w-full divide-y divide-gray-200 h-full">
@@ -97,7 +89,7 @@ const Tabella = async () => {
         </thead>
 
         <tbody id="datatable">
-          <TabellaBody data={data} />
+          <TabellaBody />
         </tbody>
       </table>
     </div>

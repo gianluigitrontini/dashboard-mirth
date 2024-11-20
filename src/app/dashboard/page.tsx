@@ -1,7 +1,7 @@
 import FilterPills from "@/components/Dashboard/FilterPills";
 import Header from "@/components/Dashboard/Header/Header";
 import MenuLaterale from "@/components/Dashboard/MenuLaterale/MenuLaterale";
-import Tabella from "@/components/Tabella/Tabella";
+import Tabella from "@/components/Tabella2/Tabella";
 
 export default function Dashboard() {
   return (
