@@ -11,19 +11,19 @@ export async function POST(request: Request) {
 
     try {
         let res: Response = await fetch(
-            MIRTH_URL_V2 + `users/_login?username=${req.name}&password=${req.password}`,
+            MIRTH_URL_V2 + `/users/_login?username=${req.name}&password=${req.password}`,
             {
                 method: "POST",
                 headers: {
+                    "Accept": "application/json",
                     "X-Requested-With": "XMLHttpRequest",
                     "Content-Type": "application/x-www-form-urlencoded",
-                    "credentials": "include",
                 },
             }
         )
-        const xml = await res.text();
-        const parser = new xml2js.Parser({ explicitArray: false });
-        const resultText = await parser.parseStringPromise(xml)
+        const result = await res.json();
+
+        console.log(result)
 
         // Posso settare il cookie o qui:
         const cookieValue = res.headers.getSetCookie()[0].match(/(?<=JSESSIONID=)([^;]+)/) || "";
@@ -37,7 +37,7 @@ export async function POST(request: Request) {
         });
 
         // oppure posso settare il cookie in NextResponse.json, tramite l'header "Set-Cookie":
-        return NextResponse.json(resultText)
+        return NextResponse.json(result)
     } catch (error) {
         return new NextResponse("", { status: 500 })
     }
